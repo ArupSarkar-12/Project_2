@@ -1,0 +1,75 @@
+*{
+    
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+body{
+    background-color:rgb(189, 241, 224);
+}
+.app{
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+.app h1{
+    font-weight: 600;
+    color: darkgreen;
+    text-align: center;
+    border-bottom: 1px solid rgb(199, 198, 198);
+    padding-bottom: 30px;
+}
+.quiz{
+    padding: 20px 0;
+}
+.quiz h2{
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+}
+.btn{
+    color: black;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid black;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+
+}
+.btn:hover:not([disabled]){                         /* not disabled is use for no value no effect after answwer selecct*/
+    background-color: antiquewhite;
+
+}
+.btn:disabled{
+    cursor: no-drop;
+}
+#next-btn{
+    width: 64px;
+    height: 56px;
+    background-color: rgb(118, 188, 118);
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    color:white;
+    cursor: pointer;
+    display: none;
+       
+
+}
+.correct{
+    background-color: lightgreen;
+
+}
+.Incorrect{
+    background-color: lightsalmon;
+}
