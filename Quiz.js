@@ -45,97 +45,97 @@ const questions = [
         ]
     },
 ];                                                          
-const questionElement = document.getElementById("question");                            //shows the current question
-const answerButton = document.getElementById("answer-button");                          // containers of answer button
-const nextButton = document.getElementById("next-btn");                                 // button to move to the next question
+const questionElement = document.getElementById("question");                            
+const answerButton = document.getElementById("answer-button");                         
+const nextButton = document.getElementById("next-btn");                                 
 
 
-let currentQuestionIndex = 0;                                                           //Tracks the index of the current question.
-let score = 0;                                  //Tracks the number of correct answers.                                                            
-//1
+let currentQuestionIndex = 0;                                                          
+let score = 0;                                                                                       
+
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
-    nextButton.innerHTML = "Next";                      //Sets the nextButton text to "Next".
-    showQuestion();                                     //Calls showQuestion to display the first question
+    nextButton.innerHTML = "Next";                      
+    showQuestion();                                     
 }
-//2
+
 function showQuestion(){
-    resetState();                                                   //resetState() clears previous answers.
+    resetState();                                                   
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex+1;
-    questionElement.innerHTML = questionNo + ". " +currentQuestion.question;            //The question number and text are set in questionElement.
+    questionElement.innerHTML = questionNo + ". " +currentQuestion.question;            
 
-//3
+
     currentQuestion.answers.forEach(answer =>{
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
-        answerButton.appendChild(button);                       //A button is created and added to answerButton.
+        answerButton.appendChild(button);                       
         //8
         if(answer.correct){
-            button.dataset.correct = answer.correct;            //If the answer is correct, a data-correct attribute is set to "true".
+            button.dataset.correct = answer.correct;            
         }
         //6
-        button.addEventListener("click",selectAnswer);           //An event listener is attached to each button, triggering selectAnswer on click.
+        button.addEventListener("click",selectAnswer);          
     });
 }
-//5
+
 function resetState(){
-    nextButton.style.display = "none";                          //Hides the nextButton initially.     
+    nextButton.style.display = "none";                             
     while(answerButton.firstChild){
-        answerButton.removeChild(answerButton.firstChild);              //Removes any existing answer buttons.
+        answerButton.removeChild(answerButton.firstChild);             
     }
 }
-//7
-function selectAnswer(e){                               //Handles the logic when an answer is selected:
+
+function selectAnswer(e){                               
     const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === "true";           //Checks if the selected answer is correct by evaluating dataset.correct.
+    const isCorrect = selectedBtn.dataset.correct === "true";           
     if(isCorrect){
-        selectedBtn.classList.add("correct");                       //If correct, the button gets a "correct" class, and the score is incremented.
+        selectedBtn.classList.add("correct");                       
         //10
         score++;
 
     }else{
-        selectedBtn.classList.add("Incorrect");                     //If incorrect, the button gets an "Incorrect" class.
+        selectedBtn.classList.add("Incorrect");                     
     }
-    //9
+    
     Array.from(answerButton.children).forEach(button => {
         if(button.dataset.correct == "true"){
             button.classList.add("correct");
         }
-        button.disabled = true;                                     //All answer buttons are disabled, and correct answers are highlighted.
+        button.disabled = true;                                    
     });
-    nextButton.style.display = "block";                             //The nextButton is made visible to proceed to the next question.
+    nextButton.style.display = "block";                            
 }
-//14
-function showScore(){                                               //Displays the final score after the quiz ends.
+
+function showScore(){                                               
     resetState();
     questionElement.innerHTML = `Your score ${score} out of ${questions.length}!`;
     nextButton.innerHTML = "Start Again";
-    nextButton.style.display = "block";                             //Updates the nextButton to say "Start Again" for restarting the quiz.
+    nextButton.style.display = "block";                           
 }
-//12
-function handleNextButton(){                                        //Advances to the next question or displays the score if the quiz is complete.
+
+function handleNextButton(){                                       
     currentQuestionIndex++;
     if(currentQuestionIndex<questions.length){
         showQuestion();
     }else{
-        //13
+        
         showScore();
     }
 }
 
-//11
-nextButton.addEventListener("click",() =>{                       //Triggers handleNextButton if questions remain; otherwise, it restarts the quiz.
+
+nextButton.addEventListener("click",() =>{                     
     if(currentQuestionIndex< questions.length){
         handleNextButton();
     }else{
         startQuiz();
     }
 })
-//4
-startQuiz();                    //Automatically starts the quiz when the script is loaded.
+
+startQuiz();                    
 
 
 
